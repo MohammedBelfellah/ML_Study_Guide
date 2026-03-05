@@ -1,0 +1,2482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI & Machine Learning - Complete Study Guide / Guide d'Étude Complet</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+
+        :root {
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --surface2: #334155;
+            --border: #475569;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent2: #818cf8;
+            --green: #4ade80;
+            --orange: #fb923c;
+            --pink: #f472b6;
+            --yellow: #fbbf24;
+            --red: #f87171;
+            --cyan: #22d3ee;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            scroll-behavior: smooth;
+        }
+
+        /* ===== LANGUAGE TOGGLE ===== */
+        .lang-toggle {
+            display: flex;
+            gap: 0;
+            margin: 15px 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .lang-btn {
+            flex: 1;
+            padding: 8px 0;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            background: transparent;
+            color: var(--text-muted);
+            border: none;
+            transition: all 0.2s;
+            letter-spacing: 1px;
+        }
+
+        .lang-btn.active {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        .lang-btn:hover:not(.active) {
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--accent);
+        }
+
+        /* Language visibility */
+        .fr {
+            display: none;
+        }
+
+        .en {
+            display: inline;
+        }
+
+        body.lang-fr .fr {
+            display: inline;
+        }
+
+        body.lang-fr .en {
+            display: none;
+        }
+
+        body.lang-fr li.en,
+        body.lang-fr tr.en,
+        body.lang-fr p.en,
+        body.lang-fr div.en,
+        body.lang-fr strong.en,
+        body.lang-fr h2.en,
+        body.lang-fr h3.en,
+        body.lang-fr h4.en,
+        body.lang-fr span.en,
+        body.lang-fr option.en {
+            display: none;
+        }
+
+        body.lang-fr li.fr,
+        body.lang-fr tr.fr,
+        body.lang-fr p.fr,
+        body.lang-fr div.fr,
+        body.lang-fr strong.fr,
+        body.lang-fr h2.fr,
+        body.lang-fr h3.fr,
+        body.lang-fr h4.fr,
+        body.lang-fr span.fr,
+        body.lang-fr option.fr {
+            display: block;
+        }
+
+        body.lang-fr span.fr {
+            display: inline;
+        }
+
+        body:not(.lang-fr) li.fr,
+        body:not(.lang-fr) tr.fr,
+        body:not(.lang-fr) p.fr,
+        body:not(.lang-fr) div.fr,
+        body:not(.lang-fr) strong.fr,
+        body:not(.lang-fr) h2.fr,
+        body:not(.lang-fr) h3.fr,
+        body:not(.lang-fr) h4.fr {
+            display: none;
+        }
+
+        /* ===== SIDEBAR NAV ===== */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            overflow-y: auto;
+            z-index: 100;
+            padding: 20px 0;
+            transition: transform 0.3s;
+        }
+
+        .sidebar h2 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            padding: 0 20px 15px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 10px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 8px 20px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            color: var(--accent);
+            background: rgba(56, 189, 248, 0.08);
+            border-left-color: var(--accent);
+        }
+
+        .sidebar .nav-section {
+            font-weight: 700;
+            color: var(--text);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 15px 20px 5px;
+            pointer-events: none;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main {
+            margin-left: 280px;
+            padding: 40px 60px 100px;
+            max-width: 1100px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 0 40px;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--accent2), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.15em;
+            color: var(--text-muted);
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .pipeline {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .pipeline-step {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px 18px;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            min-width: 110px;
+            position: relative;
+        }
+
+        .pipeline-step .num {
+            display: block;
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .pipeline-step:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent);
+            font-size: 18px;
+        }
+
+        .ps-1 {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .ps-2 {
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        .ps-3 {
+            border-color: var(--orange);
+            color: var(--orange);
+        }
+
+        .ps-4 {
+            border-color: var(--pink);
+            color: var(--pink);
+        }
+
+        .ps-5 {
+            border-color: var(--yellow);
+            color: var(--yellow);
+        }
+
+        .ps-6 {
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+
+        .ps-7 {
+            border-color: var(--red);
+            color: var(--red);
+        }
+
+        section {
+            margin-bottom: 60px;
+        }
+
+        section h2 {
+            font-size: 2em;
+            font-weight: 800;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        section h3 {
+            font-size: 1.35em;
+            font-weight: 700;
+            margin: 30px 0 12px;
+            color: var(--accent);
+        }
+
+        section h4 {
+            font-size: 1.05em;
+            font-weight: 600;
+            margin: 20px 0 8px;
+            color: var(--accent2);
+        }
+
+        p,
+        li {
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        ul,
+        ol {
+            padding-left: 24px;
+            margin-bottom: 16px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        strong {
+            color: var(--text);
+        }
+
+        pre {
+            background: #0d1117;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 16px 0;
+            position: relative;
+        }
+
+        pre::before {
+            content: attr(data-lang);
+            position: absolute;
+            top: 8px;
+            right: 14px;
+            font-size: 11px;
+            color: var(--text-muted);
+            background: var(--surface2);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        p code,
+        li code {
+            background: var(--surface2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: var(--cyan);
+        }
+
+        .box {
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin: 18px 0;
+            border-left: 4px solid;
+        }
+
+        .box-info {
+            background: rgba(56, 189, 248, 0.08);
+            border-color: var(--accent);
+        }
+
+        .box-tip {
+            background: rgba(74, 222, 128, 0.08);
+            border-color: var(--green);
+        }
+
+        .box-warn {
+            background: rgba(251, 146, 60, 0.08);
+            border-color: var(--orange);
+        }
+
+        .box-important {
+            background: rgba(248, 113, 113, 0.08);
+            border-color: var(--red);
+        }
+
+        .box strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .box-info strong {
+            color: var(--accent);
+        }
+
+        .box-tip strong {
+            color: var(--green);
+        }
+
+        .box-warn strong {
+            color: var(--orange);
+        }
+
+        .box-important strong {
+            color: var(--red);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+
+        th,
+        td {
+            padding: 10px 14px;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--surface2);
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        td {
+            color: var(--text-muted);
+        }
+
+        tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 5px;
+        }
+
+        .tag-lib {
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--accent);
+        }
+
+        .tag-concept {
+            background: rgba(129, 140, 248, 0.15);
+            color: var(--accent2);
+        }
+
+        .tag-step {
+            background: rgba(74, 222, 128, 0.15);
+            color: var(--green);
+        }
+
+        .cheat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .cheat-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px;
+        }
+
+        .cheat-card h4 {
+            margin-top: 0;
+            color: var(--accent);
+        }
+
+        @media (max-width: 900px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .pipeline {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .pipeline-step::after {
+                display: none;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--surface2);
+            border-radius: 4px;
+        }
+
+        section:target h2 {
+            color: var(--accent);
+            transition: color 0.5s;
+        }
+
+        .step-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: 16px;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .sb-1 {
+            background: rgba(56, 189, 248, 0.2);
+            color: var(--accent);
+        }
+
+        .sb-2 {
+            background: rgba(74, 222, 128, 0.2);
+            color: var(--green);
+        }
+
+        .sb-3 {
+            background: rgba(251, 146, 60, 0.2);
+            color: var(--orange);
+        }
+
+        .sb-4 {
+            background: rgba(244, 114, 182, 0.2);
+            color: var(--pink);
+        }
+
+        .sb-5 {
+            background: rgba(251, 191, 36, 0.2);
+            color: var(--yellow);
+        }
+
+        .sb-6 {
+            background: rgba(34, 211, 238, 0.2);
+            color: var(--cyan);
+        }
+
+        .sb-7 {
+            background: rgba(248, 113, 113, 0.2);
+            color: var(--red);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 16px 0;
+        }
+
+        .comparison>div {
+            background: var(--surface);
+            border-radius: 10px;
+            padding: 16px;
+            border: 1px solid var(--border);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-muted);
+            font-size: 13px;
+            border-top: 1px solid var(--border);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ========== SIDEBAR ========== -->
+    <nav class="sidebar">
+        <h2>📚 <span class="en">ML Study Guide</span><span class="fr">Guide ML</span></h2>
+
+        <!-- Language Toggle -->
+        <div class="lang-toggle">
+            <button class="lang-btn active" onclick="setLang('en')" id="btn-en">🇬🇧 EN</button>
+            <button class="lang-btn" onclick="setLang('fr')" id="btn-fr">🇫🇷 FR</button>
+        </div>
+
+        <a href="#overview"><span class="en">Overview & Pipeline</span><span class="fr">Vue d'ensemble &
+                Pipeline</span></a>
+        <span class="nav-section"><span class="en">Part 1 — Python Foundations</span><span class="fr">Partie 1 — Bases
+                Python</span></span>
+        <a href="#numpy"><span class="en">NumPy Essentials</span><span class="fr">NumPy — L'essentiel</span></a>
+        <a href="#pandas"><span class="en">Pandas Essentials</span><span class="fr">Pandas — L'essentiel</span></a>
+        <a href="#visualization"><span class="en">Data Visualization</span><span class="fr">Visualisation des
+                Données</span></a>
+        <span class="nav-section"><span class="en">Part 2 — ML Pipeline</span><span class="fr">Partie 2 — Pipeline
+                ML</span></span>
+        <a href="#step1"><span class="en">Step 1: Collect Data</span><span class="fr">Étape 1 : Collecter les
+                Données</span></a>
+        <a href="#step2"><span class="en">Step 2: Explore & Understand</span><span class="fr">Étape 2 : Explorer &
+                Comprendre</span></a>
+        <a href="#step3"><span class="en">Step 3: Clean & Preprocess</span><span class="fr">Étape 3 : Nettoyer &
+                Préparer</span></a>
+        <a href="#step4"><span class="en">Step 4: Feature Engineering</span><span class="fr">Étape 4 : Ingénierie des
+                Features</span></a>
+        <a href="#step5"><span class="en">Step 5: Choose & Train Model</span><span class="fr">Étape 5 : Choisir &
+                Entraîner</span></a>
+        <a href="#step6"><span class="en">Step 6: Evaluate Model</span><span class="fr">Étape 6 : Évaluer le
+                Modèle</span></a>
+        <a href="#step7"><span class="en">Step 7: Tune & Deploy</span><span class="fr">Étape 7 : Optimiser &
+                Déployer</span></a>
+        <span class="nav-section"><span class="en">Part 3 — ML Algorithms</span><span class="fr">Partie 3 — Algorithmes
+                ML</span></span>
+        <a href="#supervised"><span class="en">Supervised Learning</span><span class="fr">Apprentissage
+                Supervisé</span></a>
+        <a href="#unsupervised"><span class="en">Unsupervised Learning</span><span class="fr">Apprentissage
+                Non-Supervisé</span></a>
+        <a href="#regression"><span class="en">Regression Models</span><span class="fr">Modèles de Régression</span></a>
+        <a href="#classification"><span class="en">Classification Models</span><span class="fr">Modèles de
+                Classification</span></a>
+        <a href="#trees"><span class="en">Decision Trees & Forests</span><span class="fr">Arbres de Décision &
+                Forêts</span></a>
+        <a href="#svm">SVM & KNN</a>
+        <span class="nav-section"><span class="en">Part 4 — Practical</span><span class="fr">Partie 4 —
+                Pratique</span></span>
+        <a href="#fullexample"><span class="en">Full Example Project</span><span class="fr">Projet Complet</span></a>
+        <a href="#cheatsheet"><span class="en">Library Cheatsheet</span><span class="fr">Aide-Mémoire
+                Librairies</span></a>
+        <a href="#mistakes"><span class="en">Common Mistakes</span><span class="fr">Erreurs Courantes</span></a>
+        <a href="#resources"><span class="en">Resources & Tips</span><span class="fr">Résumé & Conseils</span></a>
+    </nav>
+
+    <!-- ========== MAIN ========== -->
+    <div class="main">
+
+        <!-- HERO -->
+        <div class="hero" id="overview">
+            <h1><span class="en">AI & Machine Learning</span><span class="fr">IA & Machine Learning</span></h1>
+            <p class="en">Your complete study guide — from Python fundamentals (NumPy & Pandas) to training, evaluating,
+                and deploying ML models. Based on your course materials + extra practical tips.</p>
+            <p class="fr">Votre guide d'étude complet — des fondamentaux Python (NumPy & Pandas) à l'entraînement,
+                l'évaluation et le déploiement de modèles ML. Basé sur vos supports de cours + conseils pratiques
+                supplémentaires.</p>
+        </div>
+
+        <!-- PIPELINE VISUAL -->
+        <div class="pipeline">
+            <div class="pipeline-step ps-1"><span class="num">1</span><span class="en">Collect Data</span><span
+                    class="fr">Collecter</span></div>
+            <div class="pipeline-step ps-2"><span class="num">2</span><span class="en">Explore (EDA)</span><span
+                    class="fr">Explorer (EDA)</span></div>
+            <div class="pipeline-step ps-3"><span class="num">3</span><span class="en">Clean & Prep</span><span
+                    class="fr">Nettoyer</span></div>
+            <div class="pipeline-step ps-4"><span class="num">4</span><span class="en">Feature Eng.</span><span
+                    class="fr">Ing. Features</span></div>
+            <div class="pipeline-step ps-5"><span class="num">5</span><span class="en">Train Model</span><span
+                    class="fr">Entraîner</span></div>
+            <div class="pipeline-step ps-6"><span class="num">6</span><span class="en">Evaluate</span><span
+                    class="fr">Évaluer</span></div>
+            <div class="pipeline-step ps-7"><span class="num">7</span><span class="en">Tune & Deploy</span><span
+                    class="fr">Optimiser</span></div>
+        </div>
+
+        <div class="box box-info">
+            <strong class="en">📌 How to Use This Guide</strong>
+            <strong class="fr">📌 Comment Utiliser Ce Guide</strong>
+            <span class="en">Each section shows: <strong>What you need to know</strong> → <strong>Which library to
+                    import</strong> → <strong>Code examples</strong> → <strong>Tips & warnings</strong>. Follow the
+                steps in order — each one builds on the previous.</span>
+            <span class="fr">Chaque section montre : <strong>Ce que vous devez savoir</strong> → <strong>Quelle
+                    librairie importer</strong> → <strong>Exemples de code</strong> → <strong>Conseils &
+                    avertissements</strong>. Suivez les étapes dans l'ordre — chacune s'appuie sur la précédente.</span>
+        </div>
+
+        <!-- =====================================================
+         PART 1: PYTHON FOUNDATIONS
+         ===================================================== -->
+
+        <section id="numpy">
+            <h2>🔢 NumPy — <span class="en">Numerical Computing</span><span class="fr">Calcul Numérique</span></h2>
+            <p><span class="tag tag-lib">Library</span> <span class="en">NumPy is THE foundation for all scientific
+                    computing in Python. Every ML library (scikit-learn, TensorFlow, PyTorch) is built on top of NumPy
+                    arrays.</span><span class="fr">NumPy est LA base du calcul scientifique en Python. Toutes les
+                    bibliothèques ML (scikit-learn, TensorFlow, PyTorch) sont construites sur les tableaux NumPy.</span>
+            </p>
+
+            <h3><span class="en">What to Import</span><span class="fr">Quoi Importer</span></h3>
+            <pre data-lang="python"><code># The ONE import you always need / L'import dont vous avez TOUJOURS besoin
+import numpy as np</code></pre>
+
+            <h3><span class="en">Key Concepts You Must Know</span><span class="fr">Concepts Clés à Connaître</span></h3>
+
+            <h4><span class="en">1. Creating Arrays</span><span class="fr">1. Créer des Tableaux</span></h4>
+            <pre data-lang="python"><code># From a Python list / À partir d'une liste Python
+arr = np.array([1, 2, 3, 4, 5])
+print(arr)           # [1 2 3 4 5]
+print(type(arr))     # &lt;class 'numpy.ndarray'&gt;
+
+# 2D array (matrix) — used for datasets (rows=samples, cols=features)
+# Tableau 2D (matrice) — utilisé pour les jeux de données (lignes=échantillons, colonnes=features)
+matrix = np.array([[1, 2, 3],
+                   [4, 5, 6],
+                   [7, 8, 9]])
+print(matrix.shape)  # (3, 3)
+
+# Quick creation functions (memorize these!)
+# Fonctions de création rapide (à mémoriser !)
+zeros = np.zeros((3, 4))       # 3x4 matrix of zeros / matrice de zéros
+ones = np.ones((2, 3))         # 2x3 matrix of ones / matrice de uns
+identity = np.eye(3)           # 3x3 identity matrix / matrice identité
+rng = np.arange(0, 10, 2)     # [0, 2, 4, 6, 8]
+lin = np.linspace(0, 1, 5)    # [0, 0.25, 0.5, 0.75, 1.0]
+rand = np.random.rand(3, 3)   # 3x3 random values [0,1) / valeurs aléatoires</code></pre>
+
+            <h4><span class="en">2. Array Properties (Know for Exams!)</span><span class="fr">2. Propriétés des Tableaux
+                    (À savoir pour les examens !)</span></h4>
+            <pre data-lang="python"><code>arr = np.array([[1, 2, 3], [4, 5, 6]])
+
+arr.shape    # (2, 3) — 2 rows, 3 columns / 2 lignes, 3 colonnes
+arr.ndim     # 2 — number of dimensions / nombre de dimensions
+arr.size     # 6 — total elements / total d'éléments
+arr.dtype    # int64 — data type / type de données</code></pre>
+
+            <h4><span class="en">3. Indexing & Slicing</span><span class="fr">3. Indexation & Découpage</span></h4>
+            <pre data-lang="python"><code>arr = np.array([[10, 20, 30],
+                [40, 50, 60],
+                [70, 80, 90]])
+
+# Single element / Élément unique
+arr[0, 1]      # 20 (row 0, col 1 / ligne 0, col 1)
+
+# Slicing: arr[rows, cols] / Découpage: arr[lignes, colonnes]
+arr[0, :]      # [10, 20, 30] — first row / première ligne
+arr[:, 1]      # [20, 50, 80] — second column / deuxième colonne
+arr[0:2, 1:3]  # [[20, 30], [50, 60]] — sub-matrix / sous-matrice
+
+# Boolean indexing (VERY useful in ML!) / Indexation booléenne (TRÈS utile en ML !)
+arr[arr > 30]  # [40, 50, 60, 70, 80, 90]</code></pre>
+
+            <h4><span class="en">4. Mathematical Operations (Vectorized — No Loops!)</span><span class="fr">4.
+                    Opérations Mathématiques (Vectorisées — Sans Boucles !)</span></h4>
+            <pre data-lang="python"><code>a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+
+# Element-wise operations (FAST) / Opérations élément par élément (RAPIDE)
+a + b        # [5, 7, 9]
+a * b        # [4, 10, 18]
+a ** 2       # [1, 4, 9]
+np.sqrt(a)   # [1.0, 1.414, 1.732]
+
+# Dot product (crucial for ML) / Produit scalaire (crucial pour le ML)
+np.dot(a, b)       # 32  (1*4 + 2*5 + 3*6)
+a @ b               # 32  (Python 3.5+)
+
+# Aggregation functions / Fonctions d'agrégation
+arr = np.array([10, 20, 30, 40])
+np.mean(arr)    # 25.0  — moyenne
+np.std(arr)     # 11.18 — écart-type
+np.sum(arr)     # 100   — somme
+np.min(arr)     # 10    — minimum
+np.max(arr)     # 40    — maximum
+np.median(arr)  # 25.0  — médiane</code></pre>
+
+            <h4><span class="en">5. Reshaping (Need This for ML Models)</span><span class="fr">5. Remodelage (Nécessaire
+                    pour les Modèles ML)</span></h4>
+            <pre data-lang="python"><code>arr = np.arange(12)          # [0, 1, 2, ..., 11]
+reshaped = arr.reshape(3, 4) # 3 rows, 4 cols / 3 lignes, 4 colonnes
+flat = reshaped.flatten()    # back to 1D / retour en 1D
+
+# Common ML reshape: make a column vector / Remodelage ML courant : vecteur colonne
+x = np.array([1, 2, 3])
+x_col = x.reshape(-1, 1)    # shape (3, 1) — required by sklearn / requis par sklearn</code></pre>
+
+            <div class="box box-tip">
+                <strong class="en">💡 Why NumPy Matters for ML</strong>
+                <strong class="fr">💡 Pourquoi NumPy est Important pour le ML</strong>
+                <ul>
+                    <li class="en">ML models expect NumPy arrays as input (or things that behave like them)</li>
+                    <li class="fr">Les modèles ML attendent des tableaux NumPy en entrée (ou des objets similaires)</li>
+                    <li class="en">Vectorized operations are 10-100x faster than Python loops</li>
+                    <li class="fr">Les opérations vectorisées sont 10 à 100x plus rapides que les boucles Python</li>
+                    <li class="en">"Broadcasting" lets you do math between arrays of different shapes</li>
+                    <li class="fr">Le « Broadcasting » permet de faire des calculs entre tableaux de formes différentes
+                    </li>
+                    <li class="en"><code>reshape(-1, 1)</code> is something you'll use ALL the time to shape features
+                    </li>
+                    <li class="fr"><code>reshape(-1, 1)</code> est quelque chose que vous utiliserez TOUT le temps pour
+                        formater les features</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- PANDAS -->
+        <section id="pandas">
+            <h2>🐼 Pandas — <span class="en">Data Manipulation</span><span class="fr">Manipulation de Données</span>
+            </h2>
+            <p><span class="tag tag-lib">Library</span> <span class="en">Pandas is how you load, explore, clean, and
+                    transform real-world data before feeding it to an ML model. If NumPy is the engine, Pandas is the
+                    dashboard.</span><span class="fr">Pandas est l'outil pour charger, explorer, nettoyer et transformer
+                    les données réelles avant de les fournir à un modèle ML. Si NumPy est le moteur, Pandas est le
+                    tableau de bord.</span></p>
+
+            <h3><span class="en">What to Import</span><span class="fr">Quoi Importer</span></h3>
+            <pre data-lang="python"><code>import pandas as pd</code></pre>
+
+            <h3><span class="en">Key Concepts You Must Know</span><span class="fr">Concepts Clés à Connaître</span></h3>
+
+            <h4>1. Series & DataFrame</h4>
+            <pre data-lang="python"><code># Series = 1D labeled array / Tableau 1D avec étiquettes
+s = pd.Series([10, 20, 30], index=['a', 'b', 'c'])
+print(s['b'])  # 20
+
+# DataFrame = 2D table (THE main data structure) / Tableau 2D (LA structure principale)
+df = pd.DataFrame({
+    'name':  ['Alice', 'Bob', 'Charlie'],
+    'age':   [25, 30, 35],
+    'score': [88.5, 92.0, 79.3]
+})</code></pre>
+
+            <h4><span class="en">2. Loading Data (Most Common Operation)</span><span class="fr">2. Charger les Données
+                    (Opération la Plus Courante)</span></h4>
+            <pre data-lang="python"><code># From CSV file / À partir d'un fichier CSV
+df = pd.read_csv("geo_urban_density_data.csv")
+
+# From Excel / À partir d'Excel
+df = pd.read_excel("data.xlsx")
+
+# Quick look — ALWAYS do these first! / Aperçu rapide — TOUJOURS faire ça d'abord !
+df.head()          # First 5 rows / 5 premières lignes
+df.tail()          # Last 5 rows / 5 dernières lignes
+df.shape           # (rows, columns) / (lignes, colonnes)
+df.columns         # Column names / Noms des colonnes
+df.dtypes          # Data types / Types de données
+df.info()          # Summary / Résumé
+df.describe()      # Statistics / Statistiques</code></pre>
+
+            <h4><span class="en">3. Selecting & Filtering Data</span><span class="fr">3. Sélection & Filtrage des
+                    Données</span></h4>
+            <pre data-lang="python"><code># Select single column / Sélectionner une colonne
+df['age']
+
+# Select multiple columns / Sélectionner plusieurs colonnes
+df[['name', 'score']]
+
+# Select rows by index / Sélectionner des lignes par index
+df.iloc[0]        # First row (by position) / Première ligne (par position)
+df.iloc[0:3]      # First 3 rows / 3 premières lignes
+df.loc[0]         # Row with label 0 / Ligne avec étiquette 0
+
+# Filter by condition / Filtrer par condition
+df[df['age'] > 25]
+df[(df['age'] > 25) & (df['score'] > 80)]  # Multiple conditions / Conditions multiples</code></pre>
+
+            <h4><span class="en">4. Handling Missing Values (You WILL encounter this)</span><span class="fr">4. Gestion
+                    des Valeurs Manquantes (Vous ALLEZ rencontrer ça)</span></h4>
+            <pre data-lang="python"><code># Check for missing values / Vérifier les valeurs manquantes
+df.isna().sum()                # Count NaN per column / Compter les NaN par colonne
+df.isna().mean()               # Percentage missing / Pourcentage manquant
+
+# Deal with missing values / Gérer les valeurs manquantes
+df.dropna()                    # Remove rows with NaN / Supprimer les lignes avec NaN
+df.fillna(0)                   # Fill NaN with 0 / Remplir les NaN avec 0
+df['age'].fillna(df['age'].mean())    # Fill with mean / Remplir avec la moyenne
+df['age'].fillna(df['age'].median())  # Fill with median / Remplir avec la médiane</code></pre>
+
+            <h4><span class="en">5. Data Transformation</span><span class="fr">5. Transformation des Données</span></h4>
+            <pre data-lang="python"><code># Add new column / Ajouter une colonne
+df['age_squared'] = df['age'] ** 2
+
+# Apply function / Appliquer une fonction
+df['name_upper'] = df['name'].apply(lambda x: x.upper())
+
+# Group by and aggregate / Grouper et agréger (comme SQL GROUP BY)
+df.groupby('category').mean()
+df.groupby('category')['score'].agg(['mean', 'std', 'count'])
+
+# Sort / Trier
+df.sort_values('score', ascending=False)
+
+# Remove duplicates / Supprimer les doublons
+df.drop_duplicates()
+
+# Rename columns / Renommer les colonnes
+df.rename(columns={'old_name': 'new_name'}, inplace=True)</code></pre>
+
+            <div class="box box-warn">
+                <strong class="en">⚠️ Common Pandas Pitfalls</strong>
+                <strong class="fr">⚠️ Pièges Courants de Pandas</strong>
+                <ul>
+                    <li class="en">Always check <code>df.dtypes</code> — a "number" column might be loaded as string!
+                    </li>
+                    <li class="fr">Toujours vérifier <code>df.dtypes</code> — une colonne "numérique" pourrait être
+                        chargée comme chaîne !</li>
+                    <li class="en">Use <code>inplace=True</code> or reassign: <code>df = df.dropna()</code> — otherwise
+                        nothing changes</li>
+                    <li class="fr">Utilisez <code>inplace=True</code> ou réassignez : <code>df = df.dropna()</code> —
+                        sinon rien ne change</li>
+                    <li class="en">Watch out for the <code>SettingWithCopyWarning</code> — use <code>.loc[]</code> for
+                        safe assignments</li>
+                    <li class="fr">Attention au <code>SettingWithCopyWarning</code> — utilisez <code>.loc[]</code> pour
+                        des assignations sûres</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- VISUALIZATION -->
+        <section id="visualization">
+            <h2>📊 <span class="en">Data Visualization</span><span class="fr">Visualisation des Données</span></h2>
+            <p><span class="tag tag-lib">Library</span> <span class="en">Matplotlib and Seaborn help you SEE your data.
+                    Visualization is not optional — it's how you understand what your data looks like before
+                    modeling.</span><span class="fr">Matplotlib et Seaborn vous aident à VOIR vos données. La
+                    visualisation n'est pas optionnelle — c'est ainsi que vous comprenez vos données avant la
+                    modélisation.</span></p>
+
+            <h3><span class="en">What to Import</span><span class="fr">Quoi Importer</span></h3>
+            <pre data-lang="python"><code>import matplotlib.pyplot as plt
+import seaborn as sns
+
+# For Jupyter notebooks / Pour les notebooks Jupyter :
+%matplotlib inline</code></pre>
+
+            <h3><span class="en">Essential Plots for ML</span><span class="fr">Graphiques Essentiels pour le ML</span>
+            </h3>
+            <pre data-lang="python"><code># 1. Histogram — distribution / Histogramme — distribution
+plt.figure(figsize=(8, 5))
+plt.hist(df['densite_population'], bins=30, color='steelblue', edgecolor='black')
+plt.xlabel('Population Density / Densité de Population')
+plt.ylabel('Frequency / Fréquence')
+plt.title('Distribution of Population Density')
+plt.show()
+
+# 2. Scatter plot — relationship / Nuage de points — relation
+plt.scatter(df['distance_centre_km'], df['densite_population'], alpha=0.5)
+plt.xlabel('Distance from Center (km)')
+plt.ylabel('Population Density')
+plt.show()
+
+# 3. Correlation heatmap / Carte de chaleur des corrélations
+plt.figure(figsize=(10, 8))
+numeric_cols = df.select_dtypes(include='number')
+sns.heatmap(numeric_cols.corr(), annot=True, cmap='coolwarm', center=0)
+plt.title('Feature Correlation Matrix')
+plt.tight_layout()
+plt.show()
+
+# 4. Box plot — detect outliers / Boîte à moustaches — détecter les outliers
+sns.boxplot(x='classe_urbaine', y='densite_population', data=df)
+plt.xticks(rotation=45)
+plt.show()
+
+# 5. Pair plot — all relationships / toutes les relations
+sns.pairplot(df[['densite_population', 'distance_centre_km', 'hauteur_moy_bat']])
+plt.show()</code></pre>
+
+            <div class="box box-tip">
+                <strong class="en">💡 When to Use Which Plot</strong>
+                <strong class="fr">💡 Quand Utiliser Quel Graphique</strong>
+                <table>
+                    <tr>
+                        <th><span class="en">Plot Type</span><span class="fr">Type de Graphique</span></th>
+                        <th><span class="en">Use For</span><span class="fr">Utilisation</span></th>
+                        <th><span class="en">Function</span><span class="fr">Fonction</span></th>
+                    </tr>
+                    <tr>
+                        <td>Histogram / Histogramme</td>
+                        <td><span class="en">Distribution of one variable</span><span class="fr">Distribution d'une
+                                variable</span></td>
+                        <td><code>plt.hist()</code></td>
+                    </tr>
+                    <tr>
+                        <td>Scatter / Nuage de points</td>
+                        <td><span class="en">Relationship between 2 variables</span><span class="fr">Relation entre 2
+                                variables</span></td>
+                        <td><code>plt.scatter()</code></td>
+                    </tr>
+                    <tr>
+                        <td>Heatmap / Carte de chaleur</td>
+                        <td><span class="en">Correlations between all features</span><span class="fr">Corrélations entre
+                                toutes les features</span></td>
+                        <td><code>sns.heatmap()</code></td>
+                    </tr>
+                    <tr>
+                        <td>Box Plot / Boîte à moustaches</td>
+                        <td><span class="en">Outlier detection</span><span class="fr">Détection des valeurs
+                                aberrantes</span></td>
+                        <td><code>sns.boxplot()</code></td>
+                    </tr>
+                    <tr>
+                        <td>Bar Plot / Diagramme en barres</td>
+                        <td><span class="en">Comparing categories</span><span class="fr">Comparer les catégories</span>
+                        </td>
+                        <td><code>sns.barplot()</code></td>
+                    </tr>
+                    <tr>
+                        <td>Pair Plot</td>
+                        <td><span class="en">All pairwise relationships</span><span class="fr">Toutes les relations par
+                                paires</span></td>
+                        <td><code>sns.pairplot()</code></td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- =====================================================
+         PART 2: ML PIPELINE (7 STEPS)
+         ===================================================== -->
+
+        <section id="step1">
+            <h2><span class="en">Step 1: Collect & Load Data</span><span class="fr">Étape 1 : Collecter & Charger les
+                    Données</span></h2>
+            <div class="step-header">
+                <span class="step-badge sb-1">1</span>
+                <div><span class="tag tag-step">Pipeline Step</span> <span class="tag tag-lib">pandas</span></div>
+            </div>
+
+            <p class="en">Every ML project starts with data. You need to load it, understand its structure, and know
+                what each column means.</p>
+            <p class="fr">Tout projet ML commence par les données. Vous devez les charger, comprendre leur structure et
+                savoir ce que chaque colonne signifie.</p>
+
+            <h3><span class="en">Libraries for This Step</span><span class="fr">Librairies pour cette Étape</span></h3>
+            <pre data-lang="python"><code>import pandas as pd
+import numpy as np</code></pre>
+
+            <h3><span class="en">How to Do It</span><span class="fr">Comment Faire</span></h3>
+            <pre data-lang="python"><code># Load dataset / Charger le jeu de données
+df = pd.read_csv("geo_urban_density_data.csv")
+
+# Immediate checks (ALWAYS do all of these) / Vérifications immédiates (TOUJOURS)
+print("Shape:", df.shape)                    # How many rows/columns? / Combien de lignes/colonnes ?
+print("Columns:", df.columns.tolist())       # What features? / Quelles features ?
+print("Data types:\n", df.dtypes)            # Column types / Types des colonnes
+print("First rows:\n", df.head())            # Preview / Aperçu
+print("Missing values:\n", df.isna().sum())  # Missing data / Données manquantes
+print("Stats:\n", df.describe())             # Statistics / Statistiques</code></pre>
+
+            <h3><span class="en">What You Should Know After This Step</span><span class="fr">Ce Que Vous Devez Savoir
+                    Après Cette Étape</span></h3>
+            <ul>
+                <li class="en"><strong>How many samples</strong> (rows) and <strong>features</strong> (columns) you have
+                </li>
+                <li class="fr"><strong>Combien d'échantillons</strong> (lignes) et de <strong>features</strong>
+                    (colonnes) vous avez</li>
+                <li class="en"><strong>What is the target variable</strong> (what you want to predict)</li>
+                <li class="fr"><strong>Quelle est la variable cible</strong> (ce que vous voulez prédire)</li>
+                <li class="en">Which columns are <strong>numerical</strong> vs <strong>categorical</strong></li>
+                <li class="fr">Quelles colonnes sont <strong>numériques</strong> vs <strong>catégorielles</strong></li>
+                <li class="en">How much <strong>missing data</strong> exists</li>
+                <li class="fr">Combien de <strong>données manquantes</strong> il y a</li>
+            </ul>
+
+            <div class="box box-info">
+                <strong class="en">📌 From Your Course Data</strong>
+                <strong class="fr">📌 Depuis Vos Données de Cours</strong>
+                <span class="en">Your CSV has columns like <code>densite_population</code>,
+                    <code>densite_batiments</code>, <code>hauteur_moy_bat</code>, <code>distance_centre_km</code>,
+                    <code>classe_urbaine</code> (target), etc. The target <code>classe_urbaine</code> is categorical —
+                    this means you'll do <strong>classification</strong>.</span>
+                <span class="fr">Votre CSV contient des colonnes comme <code>densite_population</code>,
+                    <code>densite_batiments</code>, <code>hauteur_moy_bat</code>, <code>distance_centre_km</code>,
+                    <code>classe_urbaine</code> (cible), etc. La cible <code>classe_urbaine</code> est catégorielle —
+                    cela signifie que vous ferez de la <strong>classification</strong>.</span>
+            </div>
+        </section>
+
+        <section id="step2">
+            <h2><span class="en">Step 2: Explore & Understand (EDA)</span><span class="fr">Étape 2 : Explorer &
+                    Comprendre (EDA)</span></h2>
+            <div class="step-header">
+                <span class="step-badge sb-2">2</span>
+                <div><span class="tag tag-step">Pipeline Step</span> <span class="tag tag-lib">pandas</span> <span
+                        class="tag tag-lib">matplotlib</span> <span class="tag tag-lib">seaborn</span></div>
+            </div>
+
+            <p class="en"><strong>EDA = Exploratory Data Analysis.</strong> This is where you become friends with your
+                data. You LOOK at it before doing anything else.</p>
+            <p class="fr"><strong>EDA = Analyse Exploratoire des Données.</strong> C'est ici que vous faites
+                connaissance avec vos données. Vous les REGARDEZ avant de faire quoi que ce soit.</p>
+
+            <h3><span class="en">Libraries for This Step</span><span class="fr">Librairies pour cette Étape</span></h3>
+            <pre data-lang="python"><code>import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns</code></pre>
+
+            <h3><span class="en">What to Do</span><span class="fr">Quoi Faire</span></h3>
+            <pre data-lang="python"><code># 1. Check class distribution / Vérifier la distribution des classes
+print(df['classe_urbaine'].value_counts())
+df['classe_urbaine'].value_counts().plot(kind='bar')
+plt.title('Class Distribution / Distribution des Classes')
+plt.show()
+
+# 2. Correlation analysis / Analyse de corrélation
+numeric_df = df.select_dtypes(include=[np.number])
+plt.figure(figsize=(10, 8))
+sns.heatmap(numeric_df.corr(), annot=True, cmap='RdBu_r', center=0)
+plt.title('Feature Correlations')
+plt.tight_layout()
+plt.show()
+
+# 3. Distribution of each feature / Distribution de chaque feature
+numeric_df.hist(bins=30, figsize=(15, 10))
+plt.tight_layout()
+plt.show()
+
+# 4. Check for outliers / Vérifier les valeurs aberrantes
+for col in numeric_df.columns:
+    plt.figure(figsize=(8, 3))
+    sns.boxplot(x=numeric_df[col])
+    plt.title(f'Outliers in {col}')
+    plt.show()</code></pre>
+
+            <div class="box box-warn">
+                <strong class="en">⚠️ What to Watch For in EDA</strong>
+                <strong class="fr">⚠️ Ce qu'il Faut Surveiller dans l'EDA</strong>
+                <ul>
+                    <li class="en"><strong>Imbalanced classes</strong>: If 90% of data is one class, your model will be
+                        biased</li>
+                    <li class="fr"><strong>Classes déséquilibrées</strong> : Si 90% des données sont d'une seule classe,
+                        votre modèle sera biaisé</li>
+                    <li class="en"><strong>High correlation between features</strong>: May cause multicollinearity
+                        (remove one)</li>
+                    <li class="fr"><strong>Forte corrélation entre features</strong> : Peut causer la multicolinéarité
+                        (en supprimer une)</li>
+                    <li class="en"><strong>Outliers</strong>: Extreme values can distort your model</li>
+                    <li class="fr"><strong>Valeurs aberrantes</strong> : Les valeurs extrêmes peuvent fausser votre
+                        modèle</li>
+                    <li class="en"><strong>Features that don't vary</strong>: Columns with almost one value are useless
+                    </li>
+                    <li class="fr"><strong>Features qui ne varient pas</strong> : Les colonnes avec presque une seule
+                        valeur sont inutiles</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="step3">
+            <h2><span class="en">Step 3: Clean & Preprocess Data</span><span class="fr">Étape 3 : Nettoyer & Prétraiter
+                    les Données</span></h2>
+            <div class="step-header">
+                <span class="step-badge sb-3">3</span>
+                <div><span class="tag tag-step">Pipeline Step</span> <span class="tag tag-lib">pandas</span> <span
+                        class="tag tag-lib">sklearn.preprocessing</span></div>
+            </div>
+
+            <p class="en">Real data is ALWAYS messy. This step is where you spend most of your time (60-80% of any ML
+                project).</p>
+            <p class="fr">Les données réelles sont TOUJOURS désordonnées. Cette étape est celle où vous passez le plus
+                de temps (60-80% de tout projet ML).</p>
+
+            <h3><span class="en">Libraries for This Step</span><span class="fr">Librairies pour cette Étape</span></h3>
+            <pre data-lang="python"><code>import pandas as pd
+import numpy as np
+from sklearn.preprocessing import LabelEncoder, StandardScaler, MinMaxScaler
+from sklearn.model_selection import train_test_split</code></pre>
+
+            <h3><span class="en">Sub-steps</span><span class="fr">Sous-étapes</span></h3>
+
+            <h4><span class="en">3a. Handle Missing Values</span><span class="fr">3a. Gérer les Valeurs
+                    Manquantes</span></h4>
+            <pre data-lang="python"><code># Check missing / Vérifier les manquants
+print(df.isna().sum())
+
+# Strategy 1: Drop rows / Stratégie 1 : Supprimer les lignes
+df = df.dropna(thresh=len(df.columns) * 0.5)  # Keep rows with ≥50% data
+
+# Strategy 2: Fill numerical with median / Stratégie 2 : Remplir avec la médiane
+for col in df.select_dtypes(include=[np.number]).columns:
+    df[col].fillna(df[col].median(), inplace=True)
+
+# Strategy 3: Fill categorical with mode / Stratégie 3 : Remplir avec le mode
+for col in df.select_dtypes(include=['object']).columns:
+    df[col].fillna(df[col].mode()[0], inplace=True)</code></pre>
+
+            <h4><span class="en">3b. Handle Inconsistent Categories</span><span class="fr">3b. Gérer les Catégories
+                    Incohérentes</span></h4>
+            <pre data-lang="python"><code># Standardize / Normaliser les catégories
+df['classe_urbaine'] = df['classe_urbaine'].str.lower().str.strip()
+df['classe_urbaine'] = df['classe_urbaine'].str.replace('_', ' ')
+print(df['classe_urbaine'].value_counts())</code></pre>
+
+            <h4><span class="en">3c. Encode Categorical Variables</span><span class="fr">3c. Encoder les Variables
+                    Catégorielles</span></h4>
+            <pre data-lang="python"><code># ML models need NUMBERS! / Les modèles ML ont besoin de NOMBRES !
+
+# Method 1: Label Encoding / Méthode 1 : Encodage par étiquettes
+le = LabelEncoder()
+df['classe_urbaine_encoded'] = le.fit_transform(df['classe_urbaine'])
+print("Classes:", le.classes_)
+
+# Method 2: One-Hot Encoding / Méthode 2 : Encodage One-Hot
+df_encoded = pd.get_dummies(df, columns=['some_categorical_col'], drop_first=True)</code></pre>
+
+            <h4><span class="en">3d. Feature Scaling (CRITICAL for many algorithms)</span><span class="fr">3d. Mise à
+                    l'Échelle (CRITIQUE pour de nombreux algorithmes)</span></h4>
+            <pre data-lang="python"><code># WHY? Different scales confuse KNN, SVM, Neural Networks
+# POURQUOI ? Des échelles différentes perturbent KNN, SVM, Réseaux de Neurones
+
+# Method 1: StandardScaler (mean=0, std=1) / Méthode 1 (moyenne=0, écart-type=1)
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Method 2: MinMaxScaler (range 0-1) / Méthode 2 (plage 0-1)
+scaler = MinMaxScaler()
+X_scaled = scaler.fit_transform(X)</code></pre>
+
+            <h4><span class="en">3e. Split Data into Train & Test</span><span class="fr">3e. Diviser en Données
+                    d'Entraînement & de Test</span></h4>
+            <pre data-lang="python"><code># GOLDEN RULE: Never train and test on the same data!
+# RÈGLE D'OR : Ne jamais entraîner et tester sur les mêmes données !
+
+X = df.drop(columns=['classe_urbaine', 'classe_urbaine_encoded', 'zone_id'])
+y = df['classe_urbaine_encoded']
+
+# Split: 80% training, 20% testing / Division : 80% entraînement, 20% test
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, 
+    test_size=0.2,       # 20% for testing / 20% pour le test
+    random_state=42,     # Reproducible / Reproductible
+    stratify=y           # Keep proportions / Garder les proportions
+)</code></pre>
+
+            <div class="box box-important">
+                <strong class="en">🚨 Critical Rules</strong>
+                <strong class="fr">🚨 Règles Critiques</strong>
+                <ul>
+                    <li class="en">ALWAYS split BEFORE scaling — otherwise you "leak" test data info into training</li>
+                    <li class="fr">TOUJOURS diviser AVANT la mise à l'échelle — sinon vous « fuitez » les infos du test
+                        dans l'entraînement</li>
+                    <li class="en">Fit scaler on <code>X_train</code> only, then transform both</li>
+                    <li class="fr">Ajuster le scaler sur <code>X_train</code> uniquement, puis transformer les deux</li>
+                    <li class="en">Use <code>stratify=y</code> when classes are imbalanced</li>
+                    <li class="fr">Utilisez <code>stratify=y</code> quand les classes sont déséquilibrées</li>
+                    <li class="en">Use <code>random_state=42</code> so results are reproducible</li>
+                    <li class="fr">Utilisez <code>random_state=42</code> pour que les résultats soient reproductibles
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="step4">
+            <h2><span class="en">Step 4: Feature Engineering</span><span class="fr">Étape 4 : Ingénierie des
+                    Features</span></h2>
+            <div class="step-header">
+                <span class="step-badge sb-4">4</span>
+                <div><span class="tag tag-step">Pipeline Step</span> <span class="tag tag-lib">pandas</span> <span
+                        class="tag tag-lib">numpy</span> <span class="tag tag-lib">sklearn.feature_selection</span>
+                </div>
+            </div>
+
+            <p class="en">Feature engineering = creating better inputs for your model. Good features > complex model.
+            </p>
+            <p class="fr">L'ingénierie des features = créer de meilleures entrées pour votre modèle. De bonnes features
+                > un modèle complexe.</p>
+
+            <h3><span class="en">Libraries for This Step</span><span class="fr">Librairies pour cette Étape</span></h3>
+            <pre data-lang="python"><code>import pandas as pd
+import numpy as np
+from sklearn.feature_selection import SelectKBest, f_classif</code></pre>
+
+            <h3>Techniques</h3>
+            <pre data-lang="python"><code># 1. Create new features / Créer de nouvelles features
+df['density_ratio'] = df['densite_population'] / (df['densite_batiments'] + 1)
+df['building_volume'] = df['densite_batiments'] * df['hauteur_moy_bat']
+
+# 2. Binning / Discrétisation
+df['distance_bin'] = pd.cut(df['distance_centre_km'], 
+                            bins=[0, 3, 7, 15, float('inf')],
+                            labels=['center', 'inner', 'suburban', 'rural'])
+
+# 3. Log transform / Transformation logarithmique
+df['log_population'] = np.log1p(df['densite_population'])  # log(1+x)
+
+# 4. Feature Selection / Sélection de features
+selector = SelectKBest(f_classif, k=5)  # Keep top 5 / Garder les 5 meilleures
+X_selected = selector.fit_transform(X_train, y_train)
+selected_mask = selector.get_support()
+selected_features = X_train.columns[selected_mask]
+print("Best features:", selected_features.tolist())</code></pre>
+
+            <div class="box box-tip">
+                <strong class="en">💡 Feature Engineering Tips</strong>
+                <strong class="fr">💡 Conseils d'Ingénierie des Features</strong>
+                <ul>
+                    <li class="en">Domain knowledge matters: if you know <code>distance_centre_km</code> is important,
+                        emphasize it</li>
+                    <li class="fr">La connaissance du domaine compte : si vous savez que <code>distance_centre_km</code>
+                        est important, mettez-le en valeur</li>
+                    <li class="en">Try interactions: <code>feature_A * feature_B</code> can capture combined effects
+                    </li>
+                    <li class="fr">Essayez les interactions : <code>feature_A * feature_B</code> peut capturer des
+                        effets combinés</li>
+                    <li class="en">Remove highly correlated features (>0.95 correlation)</li>
+                    <li class="fr">Supprimez les features très corrélées (corrélation >0.95)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="step5">
+            <h2><span class="en">Step 5: Choose & Train Model</span><span class="fr">Étape 5 : Choisir & Entraîner le
+                    Modèle</span></h2>
+            <div class="step-header">
+                <span class="step-badge sb-5">5</span>
+                <div><span class="tag tag-step">Pipeline Step</span> <span class="tag tag-lib">sklearn</span></div>
+            </div>
+
+            <p class="en">Now the fun part! Pick an algorithm, feed it your data, and let it learn patterns.</p>
+            <p class="fr">Maintenant la partie fun ! Choisissez un algorithme, donnez-lui vos données, et laissez-le
+                apprendre des patterns.</p>
+
+            <h3><span class="en">How to Choose an Algorithm</span><span class="fr">Comment Choisir un Algorithme</span>
+            </h3>
+            <table>
+                <tr>
+                    <th><span class="en">Problem Type</span><span class="fr">Type de Problème</span></th>
+                    <th><span class="en">Target Variable</span><span class="fr">Variable Cible</span></th>
+                    <th><span class="en">Recommended Algorithms</span><span class="fr">Algorithmes Recommandés</span>
+                    </th>
+                </tr>
+                <tr>
+                    <td><strong>Classification</strong></td>
+                    <td><span class="en">Categories (e.g., "urban", "rural")</span><span class="fr">Catégories (ex:
+                            "urbain", "rural")</span></td>
+                    <td>Logistic Regression, Random Forest, SVM, KNN</td>
+                </tr>
+                <tr>
+                    <td><strong><span class="en">Regression</span><span class="fr">Régression</span></strong></td>
+                    <td><span class="en">Continuous number (e.g., price)</span><span class="fr">Nombre continu (ex:
+                            prix)</span></td>
+                    <td>Linear Regression, Ridge, Random Forest, SVR</td>
+                </tr>
+                <tr>
+                    <td><strong>Clustering</strong></td>
+                    <td><span class="en">No target (unsupervised)</span><span class="fr">Pas de cible
+                            (non-supervisé)</span></td>
+                    <td>K-Means, DBSCAN, Hierarchical</td>
+                </tr>
+            </table>
+
+            <h3><span class="en">Libraries & Code for Each Model</span><span class="fr">Librairies & Code pour Chaque
+                    Modèle</span></h3>
+
+            <h4>Logistic Regression (Classification)</h4>
+            <pre data-lang="python"><code>from sklearn.linear_model import LogisticRegression
+
+model = LogisticRegression(max_iter=1000, random_state=42)
+model.fit(X_train, y_train)            # TRAIN / ENTRAÎNER
+y_pred = model.predict(X_test)         # PREDICT / PRÉDIRE</code></pre>
+
+            <h4>Random Forest (Classification or Regression / Classification ou Régression)</h4>
+            <pre data-lang="python"><code>from sklearn.ensemble import RandomForestClassifier
+
+model = RandomForestClassifier(
+    n_estimators=100,     # Number of trees / Nombre d'arbres
+    max_depth=10,         # Max depth / Profondeur max
+    random_state=42
+)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+
+# Feature importance / Importance des features
+importances = model.feature_importances_
+for name, imp in sorted(zip(X_train.columns, importances), key=lambda x: -x[1]):
+    print(f"{name}: {imp:.4f}")</code></pre>
+
+            <h4>K-Nearest Neighbors (KNN)</h4>
+            <pre data-lang="python"><code>from sklearn.neighbors import KNeighborsClassifier
+
+model = KNeighborsClassifier(n_neighbors=5)  # K=5
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+# NOTE: KNN requires scaled features! / KNN nécessite des features normalisées !</code></pre>
+
+            <h4>Support Vector Machine (SVM)</h4>
+            <pre data-lang="python"><code>from sklearn.svm import SVC
+
+model = SVC(kernel='rbf', C=1.0, random_state=42)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+# NOTE: SVM requires scaled features! / SVM nécessite des features normalisées !</code></pre>
+
+            <h4><span class="en">Decision Tree</span><span class="fr">Arbre de Décision</span></h4>
+            <pre data-lang="python"><code>from sklearn.tree import DecisionTreeClassifier
+
+model = DecisionTreeClassifier(max_depth=5, random_state=42)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)</code></pre>
+
+            <h4><span class="en">Linear Regression (for Regression problems)</span><span class="fr">Régression Linéaire
+                    (pour les problèmes de régression)</span></h4>
+            <pre data-lang="python"><code>from sklearn.linear_model import LinearRegression
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+print("Coefficients:", model.coef_)
+print("Intercept:", model.intercept_)</code></pre>
+
+            <div class="box box-info">
+                <strong class="en">📌 The sklearn Pattern (Same for ALL models!)</strong>
+                <strong class="fr">📌 Le Pattern sklearn (Identique pour TOUS les modèles !)</strong>
+                <pre data-lang="python"><code># 1. Import / Importer
+from sklearn.some_module import SomeModel
+
+# 2. Create / Créer
+model = SomeModel(hyperparameters)
+
+# 3. Train / Entraîner
+model.fit(X_train, y_train)
+
+# 4. Predict / Prédire
+y_pred = model.predict(X_test)
+
+# 5. Evaluate / Évaluer
+from sklearn.metrics import accuracy_score
+print(accuracy_score(y_test, y_pred))</code></pre>
+                <span class="en">This pattern is ALWAYS the same. Learn it once, use it everywhere.</span>
+                <span class="fr">Ce pattern est TOUJOURS le même. Apprenez-le une fois, utilisez-le partout.</span>
+            </div>
+        </section>
+
+        <section id="step6">
+            <h2><span class="en">Step 6: Evaluate Model</span><span class="fr">Étape 6 : Évaluer le Modèle</span></h2>
+            <div class="step-header">
+                <span class="step-badge sb-6">6</span>
+                <div><span class="tag tag-step">Pipeline Step</span> <span class="tag tag-lib">sklearn.metrics</span>
+                </div>
+            </div>
+
+            <p class="en">A model that scores 95% accuracy might still be terrible. Evaluation tells you the REAL
+                performance.</p>
+            <p class="fr">Un modèle qui obtient 95% de précision peut quand même être mauvais. L'évaluation vous dit la
+                VRAIE performance.</p>
+
+            <h3><span class="en">Libraries for This Step</span><span class="fr">Librairies pour cette Étape</span></h3>
+            <pre data-lang="python"><code>from sklearn.metrics import (
+    accuracy_score,
+    classification_report,
+    confusion_matrix,
+    mean_squared_error,
+    r2_score
+)
+import seaborn as sns
+import matplotlib.pyplot as plt</code></pre>
+
+            <h3><span class="en">For Classification Problems</span><span class="fr">Pour les Problèmes de
+                    Classification</span></h3>
+            <pre data-lang="python"><code># 1. Accuracy / Exactitude
+acc = accuracy_score(y_test, y_pred)
+print(f"Accuracy: {acc:.4f}")
+
+# 2. Classification Report (Precision, Recall, F1)
+print(classification_report(y_test, y_pred, target_names=le.classes_))
+
+# 3. Confusion Matrix / Matrice de Confusion
+cm = confusion_matrix(y_test, y_pred)
+plt.figure(figsize=(8, 6))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+            xticklabels=le.classes_, yticklabels=le.classes_)
+plt.xlabel('Predicted / Prédit')
+plt.ylabel('Actual / Réel')
+plt.title('Confusion Matrix / Matrice de Confusion')
+plt.show()</code></pre>
+
+            <h3><span class="en">For Regression Problems</span><span class="fr">Pour les Problèmes de Régression</span>
+            </h3>
+            <pre data-lang="python"><code># Mean Squared Error / Erreur Quadratique Moyenne
+mse = mean_squared_error(y_test, y_pred)
+rmse = np.sqrt(mse)
+print(f"RMSE: {rmse:.4f}")
+
+# R² Score / Score R²
+r2 = r2_score(y_test, y_pred)
+print(f"R² Score: {r2:.4f}")</code></pre>
+
+            <h3><span class="en">Understanding the Metrics</span><span class="fr">Comprendre les Métriques</span></h3>
+            <table>
+                <tr>
+                    <th><span class="en">Metric</span><span class="fr">Métrique</span></th>
+                    <th><span class="en">What It Measures</span><span class="fr">Ce Qu'elle Mesure</span></th>
+                    <th><span class="en">When to Use</span><span class="fr">Quand l'Utiliser</span></th>
+                </tr>
+                <tr>
+                    <td><strong>Accuracy</strong></td>
+                    <td><span class="en">% of correct predictions</span><span class="fr">% de prédictions
+                            correctes</span></td>
+                    <td><span class="en">Balanced classes only</span><span class="fr">Classes équilibrées
+                            uniquement</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Precision</strong></td>
+                    <td><span class="en">Of predicted positive, how many are correct</span><span class="fr">Parmi les
+                            prédits positifs, combien sont corrects</span></td>
+                    <td><span class="en">When false positives are costly</span><span class="fr">Quand les faux positifs
+                            coûtent cher</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Recall / Rappel</strong></td>
+                    <td><span class="en">Of actual positive, how many caught</span><span class="fr">Parmi les vrais
+                            positifs, combien détectés</span></td>
+                    <td><span class="en">When false negatives are costly</span><span class="fr">Quand les faux négatifs
+                            coûtent cher</span></td>
+                </tr>
+                <tr>
+                    <td><strong>F1-Score</strong></td>
+                    <td><span class="en">Harmonic mean of precision & recall</span><span class="fr">Moyenne harmonique
+                            de précision & rappel</span></td>
+                    <td><span class="en">Imbalanced classes</span><span class="fr">Classes déséquilibrées</span></td>
+                </tr>
+                <tr>
+                    <td><strong>RMSE</strong></td>
+                    <td><span class="en">Average prediction error</span><span class="fr">Erreur moyenne de
+                            prédiction</span></td>
+                    <td><span class="en">Regression problems</span><span class="fr">Problèmes de régression</span></td>
+                </tr>
+                <tr>
+                    <td><strong>R²</strong></td>
+                    <td><span class="en">Variance explained by model</span><span class="fr">Variance expliquée par le
+                            modèle</span></td>
+                    <td><span class="en">Regression problems</span><span class="fr">Problèmes de régression</span></td>
+                </tr>
+            </table>
+
+            <div class="box box-warn">
+                <strong class="en">⚠️ Don't Just Look at Accuracy!</strong>
+                <strong class="fr">⚠️ Ne Regardez Pas Que l'Accuracy !</strong>
+                <span class="en">If your dataset has 95% class A and 5% class B, a model that ALWAYS predicts class A
+                    gets 95% accuracy but is useless. Always check the <strong>classification report</strong> and
+                    <strong>confusion matrix</strong>.</span>
+                <span class="fr">Si votre dataset a 95% de classe A et 5% de classe B, un modèle qui prédit TOUJOURS la
+                    classe A obtient 95% d'accuracy mais est inutile. Vérifiez toujours le <strong>rapport de
+                        classification</strong> et la <strong>matrice de confusion</strong>.</span>
+            </div>
+        </section>
+
+        <section id="step7">
+            <h2><span class="en">Step 7: Tune & Deploy</span><span class="fr">Étape 7 : Optimiser & Déployer</span></h2>
+            <div class="step-header">
+                <span class="step-badge sb-7">7</span>
+                <div><span class="tag tag-step">Pipeline Step</span> <span
+                        class="tag tag-lib">sklearn.model_selection</span> <span class="tag tag-lib">joblib</span></div>
+            </div>
+
+            <h3><span class="en">Hyperparameter Tuning</span><span class="fr">Optimisation des Hyperparamètres</span>
+            </h3>
+            <p class="en">Every model has settings (hyperparameters) you can adjust. Finding the best combination is
+                called tuning.</p>
+            <p class="fr">Chaque modèle a des paramètres (hyperparamètres) que vous pouvez ajuster. Trouver la meilleure
+                combinaison s'appelle l'optimisation.</p>
+
+            <pre data-lang="python"><code>from sklearn.model_selection import GridSearchCV, cross_val_score
+
+# Grid Search — try ALL combinations / essayer TOUTES les combinaisons
+param_grid = {
+    'n_estimators': [50, 100, 200],
+    'max_depth': [5, 10, 20, None],
+    'min_samples_split': [2, 5, 10]
+}
+
+grid_search = GridSearchCV(
+    RandomForestClassifier(random_state=42),
+    param_grid,
+    cv=5,              # 5-fold cross-validation
+    scoring='f1_weighted',
+    n_jobs=-1          # Use all CPUs / Utiliser tous les CPU
+)
+grid_search.fit(X_train, y_train)
+
+print("Best parameters:", grid_search.best_params_)
+print("Best score:", grid_search.best_score_)
+best_model = grid_search.best_estimator_
+
+# Cross-Validation / Validation Croisée
+scores = cross_val_score(model, X_train, y_train, cv=5, scoring='accuracy')
+print(f"CV Accuracy: {scores.mean():.4f} ± {scores.std():.4f}")</code></pre>
+
+            <h3><span class="en">Save & Load Model</span><span class="fr">Sauvegarder & Charger le Modèle</span></h3>
+            <pre data-lang="python"><code>import joblib
+
+# Save / Sauvegarder
+joblib.dump(best_model, 'urban_classifier_model.pkl')
+joblib.dump(scaler, 'scaler.pkl')
+joblib.dump(le, 'label_encoder.pkl')
+
+# Load / Charger
+loaded_model = joblib.load('urban_classifier_model.pkl')
+loaded_scaler = joblib.load('scaler.pkl')
+
+# Predict on new data / Prédire sur de nouvelles données
+new_data = loaded_scaler.transform(new_raw_data)
+prediction = loaded_model.predict(new_data)</code></pre>
+
+            <div class="box box-tip">
+                <strong class="en">💡 Cross-Validation Explained</strong>
+                <strong class="fr">💡 Validation Croisée Expliquée</strong>
+                <span class="en">Instead of one train/test split, cross-validation splits data into K folds (e.g., 5).
+                    It trains K times, each time using a different fold as test. This gives you a more reliable score
+                    and tells you if your model is consistent (low std = good).</span>
+                <span class="fr">Au lieu d'une seule division train/test, la validation croisée divise les données en K
+                    plis (ex: 5). Elle entraîne K fois, chaque fois en utilisant un pli différent comme test. Cela donne
+                    un score plus fiable et vous dit si votre modèle est cohérent (faible écart-type = bien).</span>
+            </div>
+        </section>
+
+        <!-- =====================================================
+         PART 3: ML ALGORITHMS IN DETAIL
+         ===================================================== -->
+
+        <section id="supervised">
+            <h2>🎯 <span class="en">Supervised Learning</span><span class="fr">Apprentissage Supervisé</span></h2>
+            <p><span class="tag tag-concept">Concept</span> <span class="en">Supervised learning = you have labeled data
+                    (input → known output). The model learns the mapping.</span><span class="fr">Apprentissage supervisé
+                    = vous avez des données étiquetées (entrée → sortie connue). Le modèle apprend la
+                    correspondance.</span></p>
+
+            <div class="comparison">
+                <div>
+                    <h4 style="color: var(--accent);">Classification</h4>
+                    <p><span class="en">Predict a <strong>category/class</strong></span><span class="fr">Prédire une
+                            <strong>catégorie/classe</strong></span></p>
+                    <ul>
+                        <li>Email → Spam <span class="en">or Not Spam</span><span class="fr">ou Pas Spam</span></li>
+                        <li>Image → <span class="en">Cat or Dog</span><span class="fr">Chat ou Chien</span></li>
+                        <li>Zone → <span class="en">Urban, Suburban, Rural</span><span class="fr">Urbain, Périurbain,
+                                Rural</span></li>
+                    </ul>
+                    <p><strong><span class="en">Algorithms:</span><span class="fr">Algorithmes :</span></strong>
+                        Logistic Regression, KNN, SVM, Decision Tree, Random Forest, Naive Bayes</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--green);"><span class="en">Regression</span><span
+                            class="fr">Régression</span></h4>
+                    <p><span class="en">Predict a <strong>continuous number</strong></span><span class="fr">Prédire un
+                            <strong>nombre continu</strong></span></p>
+                    <ul>
+                        <li>Features → <span class="en">House Price</span><span class="fr">Prix de Maison</span></li>
+                        <li><span class="en">Data → Temperature</span><span class="fr">Données → Température</span></li>
+                        <li><span class="en">History → Stock Price</span><span class="fr">Historique → Prix
+                                d'Action</span></li>
+                    </ul>
+                    <p><strong><span class="en">Algorithms:</span><span class="fr">Algorithmes :</span></strong> Linear
+                        Regression, Ridge, Lasso, SVR, Random Forest Regressor</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="unsupervised">
+            <h2>🔍 <span class="en">Unsupervised Learning</span><span class="fr">Apprentissage Non-Supervisé</span></h2>
+            <p><span class="tag tag-concept">Concept</span> <span class="en">No labels — the model finds hidden
+                    patterns/groups in the data on its own.</span><span class="fr">Pas d'étiquettes — le modèle trouve
+                    des patterns/groupes cachés dans les données tout seul.</span></p>
+
+            <h3>K-Means Clustering</h3>
+            <pre data-lang="python"><code>from sklearn.cluster import KMeans
+
+# Choose number of clusters / Choisir le nombre de clusters
+kmeans = KMeans(n_clusters=3, random_state=42, n_init=10)
+kmeans.fit(X_scaled)
+clusters = kmeans.labels_
+
+# Visualize / Visualiser
+plt.scatter(X_scaled[:, 0], X_scaled[:, 1], c=clusters, cmap='viridis', alpha=0.5)
+plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], 
+            c='red', marker='X', s=200, label='Centers / Centres')
+plt.legend()
+plt.title('K-Means Clustering')
+plt.show()
+
+# Elbow Method / Méthode du Coude
+inertias = []
+for k in range(1, 11):
+    km = KMeans(n_clusters=k, random_state=42, n_init=10)
+    km.fit(X_scaled)
+    inertias.append(km.inertia_)
+
+plt.plot(range(1, 11), inertias, 'bo-')
+plt.xlabel('Number of Clusters (K) / Nombre de Clusters (K)')
+plt.ylabel('Inertia / Inertie')
+plt.title('Elbow Method / Méthode du Coude')
+plt.show()</code></pre>
+
+            <h3><span class="en">Principal Component Analysis (PCA)</span><span class="fr">Analyse en Composantes
+                    Principales (ACP)</span></h3>
+            <pre data-lang="python"><code>from sklearn.decomposition import PCA
+
+# Reduce to 2 dimensions / Réduire à 2 dimensions
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(X_scaled)
+
+print(f"Explained variance / Variance expliquée: {pca.explained_variance_ratio_}")
+print(f"Total: {pca.explained_variance_ratio_.sum():.2%}")
+
+plt.scatter(X_pca[:, 0], X_pca[:, 1], c=y, cmap='Set2', alpha=0.6)
+plt.xlabel('PC1')
+plt.ylabel('PC2')
+plt.title('PCA — 2D Projection')
+plt.colorbar(label='Class / Classe')
+plt.show()</code></pre>
+        </section>
+
+        <section id="regression">
+            <h2>📈 <span class="en">Regression Models — Detailed</span><span class="fr">Modèles de Régression —
+                    Détaillé</span></h2>
+
+            <h3><span class="en">Linear Regression</span><span class="fr">Régression Linéaire</span></h3>
+            <p><span class="en">Finds the best straight line:</span><span class="fr">Trouve la meilleure droite :</span>
+                <strong>y = β₀ + β₁x₁ + β₂x₂ + ... + ε</strong></p>
+            <pre data-lang="python"><code>from sklearn.linear_model import LinearRegression, Ridge, Lasso
+
+# Simple Linear Regression / Régression Linéaire Simple
+model = LinearRegression()
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+
+print("Coefficients:", model.coef_)      # Weight / Poids de chaque feature
+print("Intercept:", model.intercept_)    # Bias term / Terme de biais
+print("R² Score:", model.score(X_test, y_test))
+
+# Ridge (L2 regularization / régularisation L2)
+ridge = Ridge(alpha=1.0)
+ridge.fit(X_train, y_train)
+
+# Lasso (L1 regularization / régularisation L1 — can zero out features)
+lasso = Lasso(alpha=0.1)
+lasso.fit(X_train, y_train)</code></pre>
+
+            <div class="box box-info">
+                <strong class="en">📌 Regularization (from your course)</strong>
+                <strong class="fr">📌 Régularisation (de votre cours)</strong>
+                <ul>
+                    <li class="en"><strong>Overfitting</strong> = model memorizes training data, performs badly on new
+                        data</li>
+                    <li class="fr"><strong>Surapprentissage (Overfitting)</strong> = le modèle mémorise les données
+                        d'entraînement, mauvaise performance sur de nouvelles données</li>
+                    <li class="en"><strong>Ridge (L2)</strong>: Adds penalty proportional to coefficient² → shrinks all
+                        coefficients</li>
+                    <li class="fr"><strong>Ridge (L2)</strong> : Ajoute une pénalité proportionnelle au coefficient² →
+                        réduit tous les coefficients</li>
+                    <li class="en"><strong>Lasso (L1)</strong>: Adds penalty proportional to |coefficient| → can make
+                        some exactly 0</li>
+                    <li class="fr"><strong>Lasso (L1)</strong> : Ajoute une pénalité proportionnelle à |coefficient| →
+                        peut mettre certains à 0</li>
+                    <li class="en">Higher <code>alpha</code> = stronger regularization = simpler model</li>
+                    <li class="fr">Plus <code>alpha</code> est élevé = régularisation plus forte = modèle plus simple
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="classification">
+            <h2>🏷️ <span class="en">Classification Models — Detailed</span><span class="fr">Modèles de Classification —
+                    Détaillé</span></h2>
+
+            <h3><span class="en">Logistic Regression (Despite the name, it's for CLASSIFICATION)</span><span
+                    class="fr">Régression Logistique (Malgré le nom, c'est pour la CLASSIFICATION)</span></h3>
+            <pre data-lang="python"><code>from sklearn.linear_model import LogisticRegression
+
+# For multi-class / Pour multi-classes (comme votre problème de densité urbaine)
+model = LogisticRegression(
+    multi_class='multinomial',
+    solver='lbfgs',
+    max_iter=1000,
+    random_state=42
+)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+y_proba = model.predict_proba(X_test)  # Probability per class / Probabilité par classe</code></pre>
+
+            <h3>Naive Bayes</h3>
+            <pre data-lang="python"><code>from sklearn.naive_bayes import GaussianNB
+
+# Very fast / Très rapide
+model = GaussianNB()
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+# Good for text classification / Bon pour la classification de texte</code></pre>
+        </section>
+
+        <section id="trees">
+            <h2>🌳 <span class="en">Decision Trees & Random Forests</span><span class="fr">Arbres de Décision & Forêts
+                    Aléatoires</span></h2>
+
+            <h3><span class="en">Decision Tree</span><span class="fr">Arbre de Décision</span></h3>
+            <p class="en">Splits data based on feature thresholds, like a flowchart of if/else questions.</p>
+            <p class="fr">Divise les données selon des seuils de features, comme un organigramme de questions si/sinon.
+            </p>
+            <pre data-lang="python"><code>from sklearn.tree import DecisionTreeClassifier, plot_tree
+
+model = DecisionTreeClassifier(
+    max_depth=5,              # Limit depth / Limiter la profondeur
+    min_samples_split=10,
+    min_samples_leaf=5,
+    random_state=42
+)
+model.fit(X_train, y_train)
+
+# Visualize the tree! / Visualiser l'arbre !
+plt.figure(figsize=(20, 10))
+plot_tree(model, feature_names=X_train.columns, class_names=le.classes_,
+          filled=True, rounded=True, fontsize=8)
+plt.tight_layout()
+plt.show()</code></pre>
+
+            <h3>Random Forest (<span class="en">Ensemble of Decision Trees</span><span class="fr">Ensemble d'Arbres de
+                    Décision</span>)</h3>
+            <p class="en">Creates many trees, each trained on random subsets. Final prediction = majority vote.</p>
+            <p class="fr">Crée plusieurs arbres, chacun entraîné sur des sous-ensembles aléatoires. Prédiction finale =
+                vote majoritaire.</p>
+            <pre data-lang="python"><code>from sklearn.ensemble import RandomForestClassifier
+
+clf = RandomForestClassifier(
+    n_estimators=100,    # 100 trees / 100 arbres
+    max_depth=10,
+    random_state=42,
+    n_jobs=-1            # Use all CPUs / Utiliser tous les CPU
+)
+clf.fit(X_train, y_train)
+
+# Feature Importance / Importance des Features
+importances = pd.Series(clf.feature_importances_, index=X_train.columns)
+importances.sort_values(ascending=True).plot(kind='barh', figsize=(8, 6))
+plt.title('Feature Importance (Random Forest)')
+plt.xlabel('Importance')
+plt.tight_layout()
+plt.show()</code></pre>
+
+            <div class="box box-tip">
+                <strong class="en">💡 Decision Tree vs Random Forest</strong>
+                <strong class="fr">💡 Arbre de Décision vs Forêt Aléatoire</strong>
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>Decision Tree</th>
+                        <th>Random Forest</th>
+                    </tr>
+                    <tr>
+                        <td><span class="en">Speed</span><span class="fr">Vitesse</span></td>
+                        <td><span class="en">Fast</span><span class="fr">Rapide</span></td>
+                        <td><span class="en">Slower</span><span class="fr">Plus lent</span></td>
+                    </tr>
+                    <tr>
+                        <td>Overfitting</td>
+                        <td><span class="en">Overfits easily</span><span class="fr">Surapprend facilement</span></td>
+                        <td><span class="en">Much more resistant</span><span class="fr">Beaucoup plus résistant</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="en">Accuracy</span><span class="fr">Précision</span></td>
+                        <td><span class="en">Good</span><span class="fr">Bonne</span></td>
+                        <td><span class="en">Usually better</span><span class="fr">Généralement meilleure</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="en">Interpretability</span><span class="fr">Interprétabilité</span></td>
+                        <td><span class="en">Easy to visualize</span><span class="fr">Facile à visualiser</span></td>
+                        <td><span class="en">Black box</span><span class="fr">Boîte noire</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="en">Scaling needed?</span><span class="fr">Normalisation requise ?</span></td>
+                        <td>Non</td>
+                        <td>Non</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <section id="svm">
+            <h2>🔮 SVM & KNN</h2>
+
+            <h3>Support Vector Machine (SVM)</h3>
+            <p class="en">Finds the best boundary (hyperplane) that separates classes with maximum margin.</p>
+            <p class="fr">Trouve la meilleure frontière (hyperplan) qui sépare les classes avec une marge maximale.</p>
+            <pre data-lang="python"><code>from sklearn.svm import SVC, SVR
+
+svm_clf = SVC(
+    kernel='rbf',      # 'linear', 'rbf', 'poly'
+    C=1.0,             # Regularization / Régularisation
+    gamma='scale',
+    random_state=42
+)
+svm_clf.fit(X_train_scaled, y_train)  # MUST scale! / Doit être normalisé !
+
+# Kernels / Noyaux :
+# 'linear' — straight line / ligne droite
+# 'rbf'    — curved boundary / frontière courbe (default / par défaut)
+# 'poly'   — polynomial</code></pre>
+
+            <h3>K-Nearest Neighbors (KNN) — <span class="en">K Plus Proches Voisins</span><span class="fr">K Plus
+                    Proches Voisins</span></h3>
+            <p class="en">Predicts based on the K closest training examples. No training phase — it just memorizes the
+                data.</p>
+            <p class="fr">Prédit en se basant sur les K exemples d'entraînement les plus proches. Pas de phase
+                d'entraînement — il mémorise simplement les données.</p>
+            <pre data-lang="python"><code>from sklearn.neighbors import KNeighborsClassifier
+
+knn = KNeighborsClassifier(
+    n_neighbors=5,         # K — how many neighbors / combien de voisins
+    weights='uniform',     # or 'distance'
+    metric='euclidean'     # Distance metric / Métrique de distance
+)
+knn.fit(X_train_scaled, y_train)  # MUST scale! / Doit être normalisé !
+
+# Finding the best K / Trouver le meilleur K
+train_scores, test_scores = [], []
+for k in range(1, 21):
+    knn = KNeighborsClassifier(n_neighbors=k)
+    knn.fit(X_train_scaled, y_train)
+    train_scores.append(knn.score(X_train_scaled, y_train))
+    test_scores.append(knn.score(X_test_scaled, y_test))
+
+plt.plot(range(1, 21), train_scores, label='Train')
+plt.plot(range(1, 21), test_scores, label='Test')
+plt.xlabel('K')
+plt.ylabel('Accuracy')
+plt.legend()
+plt.title('KNN — Finding Optimal K / Trouver le K Optimal')
+plt.show()</code></pre>
+
+            <div class="box box-warn">
+                <strong class="en">⚠️ SVM & KNN REQUIRE Feature Scaling!</strong>
+                <strong class="fr">⚠️ SVM & KNN NÉCESSITENT la Normalisation des Features !</strong>
+                <span class="en">Both algorithms rely on distances. If one feature ranges 0-10000 and another 0-1, the
+                    large one dominates. Always use <code>StandardScaler</code> or <code>MinMaxScaler</code>.</span>
+                <span class="fr">Les deux algorithmes reposent sur les distances. Si une feature va de 0 à 10000 et une
+                    autre de 0 à 1, la grande domine. Utilisez toujours <code>StandardScaler</code> ou
+                    <code>MinMaxScaler</code>.</span>
+            </div>
+        </section>
+
+        <!-- =====================================================
+         PART 4: PRACTICAL
+         ===================================================== -->
+
+        <section id="fullexample">
+            <h2>🔬 <span class="en">Full Example Project</span><span class="fr">Projet d'Exemple Complet</span></h2>
+            <p class="en">Here's a complete ML pipeline using your urban density dataset, from start to finish.</p>
+            <p class="fr">Voici un pipeline ML complet utilisant votre jeu de données de densité urbaine, du début à la
+                fin.</p>
+
+            <pre data-lang="python"><code># ============================================================
+# COMPLETE ML PROJECT: Urban Zone Classification
+# PROJET ML COMPLET : Classification des Zones Urbaines
+# ============================================================
+
+# ---- STEP 1: IMPORTS / ÉTAPE 1 : IMPORTS ----
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split, cross_val_score, GridSearchCV
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+import warnings
+warnings.filterwarnings('ignore')
+
+# ---- STEP 2: LOAD DATA / ÉTAPE 2 : CHARGER LES DONNÉES ----
+df = pd.read_csv("geo_urban_density_data.csv")
+print(f"Dataset shape: {df.shape}")
+print(f"Columns: {df.columns.tolist()}")
+print(f"\nMissing values:\n{df.isna().sum()}")
+print(f"\nTarget distribution:\n{df['classe_urbaine'].value_counts()}")
+
+# ---- STEP 3: CLEAN DATA / ÉTAPE 3 : NETTOYER LES DONNÉES ----
+# 3a. Standardize target labels / Normaliser les étiquettes cibles
+df['classe_urbaine'] = df['classe_urbaine'].str.lower().str.strip().str.replace('_', ' ')
+
+# 3b. Handle missing values / Gérer les valeurs manquantes
+numeric_cols = df.select_dtypes(include=[np.number]).columns
+for col in numeric_cols:
+    df[col].fillna(df[col].median(), inplace=True)
+
+# 3c. Drop non-feature columns / Supprimer les colonnes non-features
+drop_cols = ['zone_id', 'longitude', 'latitude']
+X = df.drop(columns=['classe_urbaine'] + [c for c in drop_cols if c in df.columns])
+
+# 3d. One-hot encoding
+X = pd.get_dummies(X, drop_first=True)
+
+# 3e. Encode target / Encoder la cible
+le = LabelEncoder()
+y = le.fit_transform(df['classe_urbaine'])
+
+# ---- STEP 4: SPLIT DATA / ÉTAPE 4 : DIVISER LES DONNÉES ----
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
+
+# ---- STEP 5: SCALE / ÉTAPE 5 : NORMALISER ----
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)   # fit + transform on train only!
+X_test_scaled = scaler.transform(X_test)          # transform only on test!
+
+# ---- STEP 6: TRAIN MODELS / ÉTAPE 6 : ENTRAÎNER LES MODÈLES ----
+models = {
+    'Logistic Regression': LogisticRegression(max_iter=1000, random_state=42),
+    'Decision Tree': DecisionTreeClassifier(max_depth=10, random_state=42),
+    'Random Forest': RandomForestClassifier(n_estimators=100, random_state=42),
+    'KNN (K=5)': KNeighborsClassifier(n_neighbors=5),
+    'SVM (RBF)': SVC(kernel='rbf', random_state=42),
+}
+
+results = {}
+for name, model in models.items():
+    if name in ['KNN (K=5)', 'SVM (RBF)', 'Logistic Regression']:
+        model.fit(X_train_scaled, y_train)
+        y_pred = model.predict(X_test_scaled)
+    else:
+        model.fit(X_train, y_train)
+        y_pred = model.predict(X_test)
+    
+    acc = accuracy_score(y_test, y_pred)
+    results[name] = acc
+    print(f"\n{'='*50}")
+    print(f"MODEL: {name} — Accuracy: {acc:.4f}")
+    print(classification_report(y_test, y_pred, target_names=le.classes_))
+
+# ---- STEP 7: COMPARE / ÉTAPE 7 : COMPARER ----
+results_df = pd.DataFrame(list(results.items()), columns=['Model', 'Accuracy'])
+results_df = results_df.sort_values('Accuracy', ascending=True)
+plt.figure(figsize=(10, 6))
+plt.barh(results_df['Model'], results_df['Accuracy'], color='steelblue')
+plt.xlabel('Accuracy')
+plt.title('Model Comparison / Comparaison des Modèles')
+plt.xlim(0, 1)
+plt.tight_layout()
+plt.show()
+
+# ---- STEP 8: TUNE / ÉTAPE 8 : OPTIMISER ----
+param_grid = {
+    'n_estimators': [100, 200, 300],
+    'max_depth': [5, 10, 20, None],
+    'min_samples_split': [2, 5, 10]
+}
+grid = GridSearchCV(
+    RandomForestClassifier(random_state=42), 
+    param_grid, cv=5, scoring='f1_weighted', n_jobs=-1
+)
+grid.fit(X_train, y_train)
+print(f"\nBest params: {grid.best_params_}")
+
+# ---- STEP 9: FINAL EVALUATION / ÉTAPE 9 : ÉVALUATION FINALE ----
+best_model = grid.best_estimator_
+y_final = best_model.predict(X_test)
+print(f"\nFinal Accuracy: {accuracy_score(y_test, y_final):.4f}")
+print(classification_report(y_test, y_final, target_names=le.classes_))
+
+# Confusion Matrix / Matrice de Confusion
+cm = confusion_matrix(y_test, y_final)
+plt.figure(figsize=(8, 6))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+            xticklabels=le.classes_, yticklabels=le.classes_)
+plt.xlabel('Predicted / Prédit')
+plt.ylabel('Actual / Réel')
+plt.title('Confusion Matrix — Best Model')
+plt.tight_layout()
+plt.show()
+
+# ---- STEP 10: SAVE / ÉTAPE 10 : SAUVEGARDER ----
+import joblib
+joblib.dump(best_model, 'best_model.pkl')
+joblib.dump(scaler, 'scaler.pkl')
+joblib.dump(le, 'label_encoder.pkl')
+print("\nModel saved! / Modèle sauvegardé ! ✓")</code></pre>
+        </section>
+
+        <section id="cheatsheet">
+            <h2>📋 <span class="en">Library Cheatsheet</span><span class="fr">Aide-Mémoire des Librairies</span></h2>
+            <p class="en">Quick reference: what to import for each task.</p>
+            <p class="fr">Référence rapide : quoi importer pour chaque tâche.</p>
+
+            <div class="cheat-grid">
+                <div class="cheat-card">
+                    <h4>🔢 NumPy</h4>
+                    <code>import numpy as np</code>
+                    <ul>
+                        <li><span class="en">Array creation & manipulation</span><span class="fr">Création &
+                                manipulation de tableaux</span></li>
+                        <li><span class="en">Math operations (vectorized)</span><span class="fr">Opérations math
+                                (vectorisées)</span></li>
+                        <li><code>np.array(), .reshape(), np.mean()</code></li>
+                        <li><code>np.sqrt(), np.log1p(), np.dot()</code></li>
+                    </ul>
+                </div>
+                <div class="cheat-card">
+                    <h4>🐼 Pandas</h4>
+                    <code>import pandas as pd</code>
+                    <ul>
+                        <li><span class="en">Data loading & exploration</span><span class="fr">Chargement & exploration
+                                des données</span></li>
+                        <li><span class="en">Cleaning & transformation</span><span class="fr">Nettoyage &
+                                transformation</span></li>
+                        <li><code>pd.read_csv(), .head(), .info()</code></li>
+                        <li><code>.isna(), .fillna(), .groupby()</code></li>
+                    </ul>
+                </div>
+                <div class="cheat-card">
+                    <h4>📊 Matplotlib</h4>
+                    <code>import matplotlib.pyplot as plt</code>
+                    <ul>
+                        <li><span class="en">Basic plots & charts</span><span class="fr">Graphiques de base</span></li>
+                        <li><code>plt.plot(), plt.scatter(), plt.hist()</code></li>
+                        <li><code>plt.xlabel(), plt.title(), plt.show()</code></li>
+                    </ul>
+                </div>
+                <div class="cheat-card">
+                    <h4>🎨 Seaborn</h4>
+                    <code>import seaborn as sns</code>
+                    <ul>
+                        <li><span class="en">Statistical visualizations</span><span class="fr">Visualisations
+                                statistiques</span></li>
+                        <li><code>sns.heatmap(), sns.boxplot()</code></li>
+                        <li><code>sns.pairplot(), sns.histplot()</code></li>
+                    </ul>
+                </div>
+                <div class="cheat-card">
+                    <h4>⚙️ Sklearn — Preprocessing</h4>
+                    <pre style="margin:0;padding:5px;font-size:11px"><code>from sklearn.preprocessing import (
+    LabelEncoder,
+    StandardScaler,
+    MinMaxScaler
+)
+from sklearn.model_selection import (
+    train_test_split,
+    cross_val_score,
+    GridSearchCV
+)</code></pre>
+                </div>
+                <div class="cheat-card">
+                    <h4>🤖 Sklearn — <span class="en">Models</span><span class="fr">Modèles</span></h4>
+                    <pre style="margin:0;padding:5px;font-size:11px"><code>from sklearn.linear_model import (
+    LinearRegression,
+    LogisticRegression,
+    Ridge, Lasso
+)
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
+from sklearn.naive_bayes import GaussianNB
+from sklearn.cluster import KMeans</code></pre>
+                </div>
+                <div class="cheat-card">
+                    <h4>📏 Sklearn — <span class="en">Metrics</span><span class="fr">Métriques</span></h4>
+                    <pre style="margin:0;padding:5px;font-size:11px"><code>from sklearn.metrics import (
+    accuracy_score,
+    classification_report,
+    confusion_matrix,
+    mean_squared_error,
+    r2_score,
+    f1_score
+)</code></pre>
+                </div>
+                <div class="cheat-card">
+                    <h4>💾 <span class="en">Save / Load</span><span class="fr">Sauvegarder / Charger</span></h4>
+                    <pre style="margin:0;padding:5px;font-size:11px"><code>import joblib
+
+# Save / Sauvegarder
+joblib.dump(model, 'model.pkl')
+
+# Load / Charger
+model = joblib.load('model.pkl')</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="mistakes">
+            <h2>🚫 <span class="en">Common Mistakes to Avoid</span><span class="fr">Erreurs Courantes à Éviter</span>
+            </h2>
+
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th><span class="en">Mistake</span><span class="fr">Erreur</span></th>
+                    <th><span class="en">Why It's Bad</span><span class="fr">Pourquoi c'est Mauvais</span></th>
+                    <th><span class="en">Fix</span><span class="fr">Solution</span></th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><span class="en">Testing on training data</span><span class="fr">Tester sur les données
+                            d'entraînement</span></td>
+                    <td><span class="en">Gives artificially high scores</span><span class="fr">Donne des scores
+                            artificiellement élevés</span></td>
+                    <td><span class="en">Always use <code>train_test_split()</code></span><span class="fr">Toujours
+                            utiliser <code>train_test_split()</code></span></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><span class="en">Scaling before splitting</span><span class="fr">Normaliser avant de
+                            diviser</span></td>
+                    <td><span class="en">Data leakage</span><span class="fr">Fuite de données</span></td>
+                    <td><span class="en">Split first, then <code>fit_transform</code> on train only</span><span
+                            class="fr">Diviser d'abord, puis <code>fit_transform</code> sur train uniquement</span></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><span class="en">Ignoring missing values</span><span class="fr">Ignorer les valeurs
+                            manquantes</span></td>
+                    <td><span class="en">Models crash or produce garbage</span><span class="fr">Les modèles plantent ou
+                            produisent n'importe quoi</span></td>
+                    <td><span class="en">Always check <code>df.isna().sum()</code></span><span class="fr">Toujours
+                            vérifier <code>df.isna().sum()</code></span></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><span class="en">Using accuracy on imbalanced data</span><span class="fr">Utiliser l'accuracy
+                            sur des données déséquilibrées</span></td>
+                    <td><span class="en">Misleading results</span><span class="fr">Résultats trompeurs</span></td>
+                    <td><span class="en">Use F1-score, classification_report</span><span class="fr">Utiliser F1-score,
+                            classification_report</span></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td><span class="en">Not scaling for KNN/SVM</span><span class="fr">Pas de normalisation pour
+                            KNN/SVM</span></td>
+                    <td><span class="en">Large-range features dominate</span><span class="fr">Les features à grande
+                            amplitude dominent</span></td>
+                    <td><span class="en">Always scale for distance-based models</span><span class="fr">Toujours
+                            normaliser pour les modèles basés sur la distance</span></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td><span class="en">Too complex model (overfitting)</span><span class="fr">Modèle trop complexe
+                            (surapprentissage)</span></td>
+                    <td><span class="en">Memorizes noise, fails on new data</span><span class="fr">Mémorise le bruit,
+                            échoue sur de nouvelles données</span></td>
+                    <td><span class="en">Use regularization, limit depth, cross-validation</span><span
+                            class="fr">Utiliser la régularisation, limiter la profondeur, validation croisée</span></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td><span class="en">Feeding strings to models</span><span class="fr">Donner des chaînes aux
+                            modèles</span></td>
+                    <td><span class="en">ML models only understand numbers</span><span class="fr">Les modèles ML ne
+                            comprennent que les nombres</span></td>
+                    <td><span class="en">Encode with <code>LabelEncoder</code> or <code>get_dummies()</code></span><span
+                            class="fr">Encoder avec <code>LabelEncoder</code> ou <code>get_dummies()</code></span></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td><span class="en">Not setting <code>random_state</code></span><span class="fr">Ne pas définir
+                            <code>random_state</code></span></td>
+                    <td><span class="en">Results change every run</span><span class="fr">Les résultats changent à chaque
+                            exécution</span></td>
+                    <td><code>random_state=42</code></td>
+                </tr>
+            </table>
+        </section>
+
+        <section id="resources">
+            <h2>📚 <span class="en">Summary & Key Takeaways</span><span class="fr">Résumé & Points Clés</span></h2>
+
+            <h3><span class="en">The 7-Step ML Pipeline — Remember This!</span><span class="fr">Le Pipeline ML en 7
+                    Étapes — Retenez Ceci !</span></h3>
+            <ol>
+                <li><strong><span class="en">Collect & Load</span><span class="fr">Collecter & Charger</span></strong> →
+                    <code>pd.read_csv()</code>, <code>.head()</code>, <code>.info()</code>, <code>.describe()</code>
+                </li>
+                <li><strong><span class="en">Explore (EDA)</span><span class="fr">Explorer (EDA)</span></strong> →
+                    <code>sns.heatmap()</code>, <code>plt.hist()</code>, <code>.value_counts()</code></li>
+                <li><strong><span class="en">Clean & Preprocess</span><span class="fr">Nettoyer &
+                            Prétraiter</span></strong> → <code>.fillna()</code>, <code>LabelEncoder</code>,
+                    <code>StandardScaler</code>, <code>train_test_split</code></li>
+                <li><strong><span class="en">Feature Engineering</span><span class="fr">Ingénierie des
+                            Features</span></strong> → <span class="en">Create new features</span><span class="fr">Créer
+                        de nouvelles features</span>, <code>SelectKBest</code>, <code>np.log1p()</code></li>
+                <li><strong><span class="en">Train Model</span><span class="fr">Entraîner le Modèle</span></strong> →
+                    <code>model.fit(X_train, y_train)</code></li>
+                <li><strong><span class="en">Evaluate</span><span class="fr">Évaluer</span></strong> →
+                    <code>accuracy_score</code>, <code>classification_report</code>, <code>confusion_matrix</code></li>
+                <li><strong><span class="en">Tune & Deploy</span><span class="fr">Optimiser & Déployer</span></strong> →
+                    <code>GridSearchCV</code>, <code>cross_val_score</code>, <code>joblib.dump()</code></li>
+            </ol>
+
+            <h3><span class="en">Algorithm Quick Decision Guide</span><span class="fr">Guide Rapide de Choix
+                    d'Algorithme</span></h3>
+            <div class="box box-tip">
+                <strong class="en">💡 Start Simple, Then Go Complex</strong>
+                <strong class="fr">💡 Commencez Simple, Puis Complexifiez</strong>
+                <ol>
+                    <li class="en"><strong>First try:</strong> Logistic Regression (classification) or Linear Regression
+                        (regression) — simple baseline</li>
+                    <li class="fr"><strong>Premier essai :</strong> Régression Logistique (classification) ou Régression
+                        Linéaire (régression) — ligne de base simple</li>
+                    <li class="en"><strong>Then try:</strong> Random Forest — usually best out-of-the-box</li>
+                    <li class="fr"><strong>Ensuite :</strong> Random Forest — généralement le meilleur sans réglage</li>
+                    <li class="en"><strong>If you need better:</strong> Tune hyperparameters with GridSearchCV</li>
+                    <li class="fr"><strong>Si vous voulez mieux :</strong> Optimiser les hyperparamètres avec
+                        GridSearchCV</li>
+                    <li class="en"><strong>Compare:</strong> Always compare at least 3 models</li>
+                    <li class="fr"><strong>Comparer :</strong> Toujours comparer au moins 3 modèles</li>
+                </ol>
+            </div>
+
+            <h3><span class="en">Key Formulas to Remember</span><span class="fr">Formules Clés à Retenir</span></h3>
+            <table>
+                <tr>
+                    <th><span class="en">Concept</span><span class="fr">Concept</span></th>
+                    <th><span class="en">Formula</span><span class="fr">Formule</span></th>
+                </tr>
+                <tr>
+                    <td><span class="en">Linear Regression</span><span class="fr">Régression Linéaire</span></td>
+                    <td>y = β₀ + β₁x₁ + β₂x₂ + ... + ε</td>
+                </tr>
+                <tr>
+                    <td>Accuracy / Exactitude</td>
+                    <td>(TP + TN) / (TP + TN + FP + FN)</td>
+                </tr>
+                <tr>
+                    <td>Precision / Précision</td>
+                    <td>TP / (TP + FP)</td>
+                </tr>
+                <tr>
+                    <td>Recall / Rappel</td>
+                    <td>TP / (TP + FN)</td>
+                </tr>
+                <tr>
+                    <td>F1-Score</td>
+                    <td>2 × (Precision × Recall) / (Precision + Recall)</td>
+                </tr>
+                <tr>
+                    <td>MSE / EQM</td>
+                    <td>(1/n) × Σ(yᵢ - ŷᵢ)²</td>
+                </tr>
+                <tr>
+                    <td>R²</td>
+                    <td>1 - (SS_res / SS_tot)</td>
+                </tr>
+                <tr>
+                    <td><span class="en">Euclidean Distance</span><span class="fr">Distance Euclidienne</span></td>
+                    <td>√(Σ(xᵢ - yᵢ)²) — KNN</td>
+                </tr>
+            </table>
+
+            <h3><span class="en">What to Remember from Each Library</span><span class="fr">Ce qu'il Faut Retenir de
+                    Chaque Librairie</span></h3>
+            <table>
+                <tr>
+                    <th><span class="en">Library</span><span class="fr">Librairie</span></th>
+                    <th><span class="en">You MUST Know</span><span class="fr">Vous DEVEZ Savoir</span></th>
+                </tr>
+                <tr>
+                    <td><strong>NumPy</strong></td>
+                    <td><span class="en">Array creation, indexing, reshape, vectorized math,
+                            <code>np.mean/std/dot</code></span><span class="fr">Création de tableaux, indexation,
+                            reshape, math vectorisée, <code>np.mean/std/dot</code></span></td>
+                </tr>
+                <tr>
+                    <td><strong>Pandas</strong></td>
+                    <td><code>read_csv</code>, <code>head/info/describe</code>, <span class="en">filtering</span><span
+                            class="fr">filtrage</span>, <code>isna/fillna/dropna</code>, <code>groupby</code>,
+                        <code>get_dummies</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Matplotlib</strong></td>
+                    <td><code>plt.plot/scatter/hist/show</code>, <code>figure/xlabel/ylabel/title</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Seaborn</strong></td>
+                    <td><code>heatmap</code>, <code>boxplot</code>, <code>pairplot</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Sklearn</strong></td>
+                    <td><span class="en">The <code>fit → predict → score</code> pattern, <code>train_test_split</code>,
+                            <code>StandardScaler</code>, <code>LabelEncoder</code>, metrics</span><span class="fr">Le
+                            pattern <code>fit → predict → score</code>, <code>train_test_split</code>,
+                            <code>StandardScaler</code>, <code>LabelEncoder</code>, métriques</span></td>
+                </tr>
+            </table>
+
+            <div class="box box-important">
+                <strong class="en">🎯 Final Advice</strong>
+                <strong class="fr">🎯 Conseils Finaux</strong>
+                <ol>
+                    <li class="en"><strong>Practice!</strong> Run the full example on your CSV data. Change parameters.
+                        Break things. Fix them.</li>
+                    <li class="fr"><strong>Pratiquez !</strong> Exécutez l'exemple complet sur vos données CSV. Changez
+                        les paramètres. Cassez des choses. Réparez-les.</li>
+                    <li class="en"><strong>Understand the pipeline</strong>, not just individual algorithms. The steps
+                        matter more than any single model.</li>
+                    <li class="fr"><strong>Comprenez le pipeline</strong>, pas seulement les algorithmes individuels.
+                        Les étapes comptent plus qu'un seul modèle.</li>
+                    <li class="en"><strong>Read error messages carefully</strong> — they usually tell you exactly what's
+                        wrong.</li>
+                    <li class="fr"><strong>Lisez les messages d'erreur attentivement</strong> — ils vous disent
+                        généralement exactement ce qui ne va pas.</li>
+                    <li class="en"><strong>Start with the simplest model</strong> that works, then improve.</li>
+                    <li class="fr"><strong>Commencez par le modèle le plus simple</strong> qui fonctionne, puis
+                        améliorez.</li>
+                </ol>
+            </div>
+        </section>
+
+        <footer>
+            <p class="en">AI & Machine Learning Study Guide — Based on course materials (Python Avancé NumPy & Pandas +
+                Cours IA ML)</p>
+            <p class="fr">Guide d'Étude IA & Machine Learning — Basé sur les supports de cours (Python Avancé NumPy &
+                Pandas + Cours IA ML)</p>
+            <p class="en">Generated for GIS FST — S1 Compétence Numérique Intelligence Artificielle</p>
+            <p class="fr">Généré pour GIS FST — S1 Compétence Numérique Intelligence Artificielle</p>
+            <p style="margin-top: 14px; font-size: 14px; color: var(--text-muted);">
+                <span class="en">Crafted with ❤️ by</span>
+                <span class="fr">Conçu avec ❤️ par</span>
+                <a href="https://github.com/MohammedBelfellah" target="_blank" rel="noopener noreferrer"
+                   style="color: var(--accent); text-decoration: none; font-weight: 700;">
+                    Mohammed Belfellah
+                </a>
+                 
+            </p>
+            <p style="margin-top: 4px; font-size: 12px; color: var(--text-muted); opacity: 0.7;">
+                <a href="https://github.com/MohammedBelfellah" target="_blank" rel="noopener noreferrer"
+                   style="color: var(--accent); text-decoration: none;">
+                    github.com/MohammedBelfellah
+                </a>
+            </p>
+        </footer>
+
+    </div>
+
+    <!-- ========== LANGUAGE TOGGLE SCRIPT ========== -->
+    <script>
+        function setLang(lang) {
+            const body = document.body;
+            const btnEn = document.getElementById('btn-en');
+            const btnFr = document.getElementById('btn-fr');
+
+            if (lang === 'fr') {
+                body.classList.add('lang-fr');
+                btnFr.classList.add('active');
+                btnEn.classList.remove('active');
+                document.documentElement.lang = 'fr';
+            } else {
+                body.classList.remove('lang-fr');
+                btnEn.classList.add('active');
+                btnFr.classList.remove('active');
+                document.documentElement.lang = 'en';
+            }
+
+            // Save preference
+            localStorage.setItem('ml-guide-lang', lang);
+        }
+
+        // Load saved preference on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            const saved = localStorage.getItem('ml-guide-lang');
+            if (saved) {
+                setLang(saved);
+            }
+        });
+    </script>
+
+</body>
+
+</html>
